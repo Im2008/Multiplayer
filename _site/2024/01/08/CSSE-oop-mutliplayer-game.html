@@ -73,7 +73,7 @@ window.onload = wrap_img;
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
         <style>
-    #gameBegin, #controls, #gameOver, #settings {
+    #gameBegin, #controls, #gameOver, #settings, #buttonings {
         position: relative;
         z-index: 2; /*Ensure the controls are on top*/
     }
@@ -88,6 +88,28 @@ window.onload = wrap_img;
       padding-top: 60px; /* Place content 60px from the top */
       transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
       background-color: black; 
+    }
+    #chat-box {
+      position: relative;
+      z-index: 2;
+      height: 300px;
+      overflow-y: scroll;
+      border: 3px solid #ccc;
+      border-style: double;
+      border-width: thick;
+      padding: 10px;
+    }
+    #message-input {
+      position: relative;
+      z-index: 2;
+      width: 70%;
+      padding: 8px;
+    }
+    #send-button {
+      position: relative;
+      z-index: 2;
+      padding: 8px;
+      cursor: pointer;
     }
 </style>
 
@@ -112,7 +134,16 @@ window.onload = wrap_img;
         <!-- Background controls -->
         <button id="toggleSettingsBar">Settings</button>
     </div>
+    <div id="buttonings">
+      <button id="toggleChatElements">Toggle Chat Elements</button>
+    </div>
 </div>
+
+<div id="chat-box-container">
+  <div id="chat-box"></div>
+</div>
+<p><input type="text" id="message-input" placeholder="Type your message..." />
+<button id="send-button" onclick="sendMessage()">Send</button></p>
 
 <script type="module">
     // Imports
@@ -281,6 +312,24 @@ window.onload = wrap_img;
     }
     document.getElementById("toggleSettingsBar").addEventListener("click",toggleWidth);
     document.getElementById("toggleSettingsBar1").addEventListener("click",toggleWidth);
+</script>
+
+<script type="module">
+  function sendMessage() {
+    var messageInput = document.getElementById('message-input');
+    var chatBox = document.getElementById('chat-box');
+    var message = messageInput.value;
+
+    if (message.trim() !== '') {
+      // Display the message in the chat box
+      chatBox.innerHTML += '<p><strong>You:</strong> ' + message + '</p>';
+
+      // Clear the input field
+      messageInput.value = '';
+    }
+  }
+
+  document.getElementById('send-button').addEventListener('click', sendMessage);
 </script>
 
 
