@@ -186,7 +186,7 @@ window.onload = wrap_img;
           d: { row: 2, frames: 7, idleFrame: { column: 7, frames: 0 } }
         },
         monkey: {
-          src: "/images/platformer/sprites/monkey.png",
+          src: "/images/pl atformer/sprites/monkey.png",
           width: 40,
           height: 40,
           w: { row: 9, frames: 15 },
@@ -330,6 +330,20 @@ window.onload = wrap_img;
   }
 
   document.getElementById('send-button').addEventListener('click', sendMessage);
+
+  function toggleChatElements() {
+    var chatBox = document.getElementById('chat-box');
+    var messageInput = document.getElementById('message-input');
+    var sendButton = document.getElementById('send-button');
+
+    // Toggle visibility
+    chatBox.style.display = (chatBox.style.display === 'none' || chatBox.style.display === '') ? 'block' : 'none';
+    messageInput.style.display = (messageInput.style.display === 'none' || messageInput.style.display === '') ? 'block' : 'none';
+    sendButton.style.display = (sendButton.style.display === 'none' || sendButton.style.display === '') ? 'block' : 'none';
+  }
+
+  // Attach event listener for the new toggle button
+  document.getElementById('toggleChatElements').addEventListener('click', toggleChatElements);
 </script>
 
 
