@@ -123,7 +123,7 @@ image: /images/platformer/backgrounds/hills.png
           d: { row: 2, frames: 7, idleFrame: { column: 7, frames: 0 } }
         },
         monkey: {
-          src: "/images/pl atformer/sprites/monkey.png",
+          src: "/images/platformer/sprites/monkey.png",
           width: 40,
           height: 40,
           w: { row: 9, frames: 15 },
@@ -251,10 +251,17 @@ image: /images/platformer/backgrounds/hills.png
     document.getElementById("toggleSettingsBar1").addEventListener("click",toggleWidth);
 </script>
 <script type= "module">
+  const prohibitedWords = ['westview', 'pee', 'poo', 'ian', 'matthew', 'trystan', 'gavin', 'multiplayer', 'multi', 'leaderboard', 'enemies', 'gamelevels', 'interactions', 'sass', 'sassy', 'sas', '911', 'die', 'luigi', 'peach', 'bowser', 'mario'];
+
   function sendMessage() {
     var messageInput = document.getElementById('message-input');
     var chatBox = document.getElementById('chat-box');
     var message = messageInput.value;
+
+    prohibitedWords.forEach(word => {
+      const regex = new RegExp('\\b' + word + '\\b', 'gi');
+      message = message.replace(regex, 'I Love CSSE! '.repeat(word.length));
+    });
 
     if (message.trim() !== '') {
       // Display the message in the chat box
