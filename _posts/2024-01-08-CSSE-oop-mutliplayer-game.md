@@ -8,7 +8,7 @@ image: /images/platformer/backgrounds/hills.png
 ---
 
 <style>
-    #gameBegin, #controls, #gameOver, #settings, #buttonings {
+    #gameBegin, #controls, #gameOver, #settings, #buttonings, #Multiplayer {
         position: relative;
         z-index: 2; /*Ensure the controls are on top*/
     }
@@ -61,6 +61,9 @@ image: /images/platformer/backgrounds/hills.png
     <div id="controls"> <!-- Controls -->
         <!-- Background controls -->
         <button id="toggleCanvasEffect">Invert</button>
+    </div>
+    <div id="Multiplayer">
+        <button id="multiplayer">Multiplayer</button>
     </div>
     <div id="gameOver" hidden>
         <button id="restartGame">Restart</button>
@@ -204,6 +207,22 @@ image: /images/platformer/backgrounds/hills.png
       return true;
     }
 
+    function Multiplayer() {
+      var chatBox = document.getElementById('chat-box');
+      var messageInput = document.getElementById('message-input');
+      var sendButton = document.getElementById('send-button');
+
+      var chatElem = document.getElementById("toggleChatElements");
+
+      chatElem.style.display = (chatElem.style.display === 'none' || chatElem.style.display === '') ? 'block' : 'none';
+
+      chatBox.style.display = (chatBox.style.display === 'none' || chatBox.style.display === '') ? 'block' : 'none';
+      messageInput.style.display = (messageInput.style.display === 'none' || messageInput.style.display === '') ? 'block' : 'none';
+      sendButton.style.display = (sendButton.style.display === 'none' || sendButton.style.display === '') ? 'block' : 'none';
+    }
+
+    document.getElementById('Multiplayer').addEventListener('click', Multiplayer);
+
     /*  ==========================================
      *  ========== Game Level setup ==============
      *  ==========================================
@@ -251,7 +270,10 @@ image: /images/platformer/backgrounds/hills.png
     document.getElementById("toggleSettingsBar1").addEventListener("click",toggleWidth);
 </script>
 <script type= "module">
+  //Makes a new variable "prohibitedWords" and puts a constraint on it to constrain certain words that are typed:
+
   const prohibitedWords = ['westview', 'pee', 'poo', 'ian', 'matthew', 'trystan', 'gavin', 'multiplayer', 'multi', 'leaderboard', 'enemies', 'gamelevels', 'interactions', 'sass', 'sassy', 'sas', '911', 'die', 'luigi', 'peach', 'bowser', 'mario'];
+
 
   function sendMessage() {
     var messageInput = document.getElementById('message-input');
@@ -259,6 +281,7 @@ image: /images/platformer/backgrounds/hills.png
     var message = messageInput.value;
 
     prohibitedWords.forEach(word => {
+      //RegExp refers to the words inside of "prohibitedWords"
       const regex = new RegExp('\\b' + word + '\\b', 'gi');
       message = message.replace(regex, 'I Love CSSE! '.repeat(word.length));
     });
