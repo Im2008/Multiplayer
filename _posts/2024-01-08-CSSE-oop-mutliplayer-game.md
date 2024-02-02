@@ -9,8 +9,12 @@ image: /images/platformer/backgrounds/hills.png
 
 <style>
     #gameBegin, #controls, #gameOver, #settings, #buttonings, #Multiplayer {
-        position: relative;
-        z-index: 2; /*Ensure the controls are on top*/
+      position: relative;
+      z-index: 2; /*Ensure the controls are on top*/
+      border-left: 10px double black;
+      font-family: "Times New Roman", Times, serif;
+      font-weight: bold;
+      color: white;   
     }
     .sidenav {
       position: fixed;
@@ -33,12 +37,15 @@ image: /images/platformer/backgrounds/hills.png
       border-style: double;
       border-width: thick;
       padding: 10px;
+      background-color: black;
     }
     #message-input {
       position: relative;
       z-index: 2;
       width: 70%;
       padding: 8px;
+      background-color: aqua;
+      background-clip: padding-box;
     }
     #send-button {
       position: relative;
@@ -82,7 +89,6 @@ image: /images/platformer/backgrounds/hills.png
 </div>
 <input type="text" id="message-input" placeholder="Type your message...">
 <button id="send-button" onclick="sendMessage()">Send</button>
-
 
 
 <script type="module">
@@ -269,10 +275,11 @@ image: /images/platformer/backgrounds/hills.png
     document.getElementById("toggleSettingsBar").addEventListener("click",toggleWidth);
     document.getElementById("toggleSettingsBar1").addEventListener("click",toggleWidth);
 </script>
+
 <script type= "module">
   //Makes a new variable "prohibitedWords" and puts a constraint on it to constrain certain words that are typed:
 
-  const prohibitedWords = ['westview', 'pee', 'poo', 'ian', 'matthew', 'trystan', 'gavin', 'multiplayer', 'multi', 'leaderboard', 'enemies', 'gamelevels', 'interactions', 'sass', 'sassy', 'sas', '911', 'die', 'luigi', 'peach', 'bowser', 'mario'];
+  const prohibitedWords = ['westview', 'pee', 'poo', 'ian', 'matthew', 'trystan', 'gavin', 'multiplayer', 'multi', 'leaderboard', 'enemies', 'gamelevels', 'interactions', 'sass', 'sassy', 'sas', '911', 'die', 'luigi', 'peach', 'bowser', 'mario', 'I Love CSSE!'];
 
 
   function sendMessage() {
@@ -284,6 +291,7 @@ image: /images/platformer/backgrounds/hills.png
       //RegExp refers to the words inside of "prohibitedWords"
       const regex = new RegExp('\\b' + word + '\\b', 'gi');
       message = message.replace(regex, 'I Love CSSE! '.repeat(word.length));
+
     });
 
     if (message.trim() !== '') {
@@ -296,6 +304,21 @@ image: /images/platformer/backgrounds/hills.png
   }
 
   document.getElementById('send-button').addEventListener('click', sendMessage);
+
+  document.getElementById('message-input').addEventListener('keydown', function (event) {
+    var messageInput = document.getElementById('message-input');
+    var chatBox = document.getElementById('chat-box');
+    var message = messageInput.value;
+
+    if (event.key === 'Enter') {
+      event.preventDefault(); // Prevent the default behavior of the Enter key (form submission)
+      sendMessage(); // Call the sendMessage function when Enter key is pressed
+    }
+    if (event.key === 'Tab') {
+      event.preventDefault();
+      messageInput.value = '';
+    }
+  });
 
   function toggleChatElements() {
     var chatBox = document.getElementById('chat-box');
